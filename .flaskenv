@@ -1,0 +1,2 @@
+FLASK_APP= darrkzero/
+FLASK_DEBUG = 1

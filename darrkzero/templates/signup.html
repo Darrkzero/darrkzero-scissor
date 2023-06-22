@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    {% endfor %}
+<main class="signup-back">
+    <form class="register-list" action="{{url_for('signup')}}" method="POST">
+      <h2 class="signup">SIGN UP</h2>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email">
+      
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required>
+    
+        <label for="password">Password: </label>
+        <input type="password" name="password" id="password" required>
+    
+        <label for="confirmpassword">Confirm password: </label>
+        <input type="password" name="confirmpassword" id="confirmpassword" required>
+      
+      <div class="not-signin">
+          <button class="w-50 btn btn-primary" type="submit">Sign up</button><br>
+          <div class="already">
+            Don't have an account? <a href="/login" >sign in</a>
+          </div>
+      </div>
+    </form>
+  </main>
+
+  {% endblock content%}
+
+
+
+

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %} 
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+
+        {% endfor %}
+        <div class="container-fluid intro-wrapper">
+            <div class="row">
+                <div class="col-lg-6 home">
+                    {% if current_user.is_authenticated %}
+                    <div class="">
+                        <h3 style="padding-bottom: 5px;">Hello {{current_user.username|capitalize}}</h3>
+                        <form action="{{ url_for('home') }}" class="home-list" method="POST">
+                            <label for="long_url">Url:</label>
+                            <input type="text" name="long_url" id="long_url" placeholder="https://example.com/my-long-url" required>
+
+                            <label for="custom_url">Custom url:</label>
+                            <input type="text" name="custom_url" id="custom_url" placeholder="Enter custom URL (optional)">
+
+                            <label for="title">Title:</label>
+                            <input type="text" name="title" id="title" placeholder="Enter Title">
+
+                            <br>
+                            <button type="submit" class="btn btn-primary">Shorten URL</button> 
+                        </form>
+
+                    </div>
+                    
+                    {% else %}
+                        <div class="home-intro">
+                            <h4>Welcome to</h4>
+                            <h1><img src="{{url_for('static', filename='logo2.jpg')}}" alt="logo img">DarrkZero</h1>
+                            <h3>Shorten URLs. Generate QR Codes. Customization.</h3>
+                            <button type="button" class="btn btn-outline-primary"><a class="signup-already" href="{{url_for('signup')}}">Sign up to get started</a></button>
+                        </div>
+                        
+                        
+                    {% endif %}
+                </div>
+
+                <div class="col-lg-6 image">
+                    <img class="img-home" src="{{url_for('static', filename='/home.png')}}" alt="darrkzero" >
+                </div>
+            </div>
+        </div>
+ 
+
+
+{% endblock content %}

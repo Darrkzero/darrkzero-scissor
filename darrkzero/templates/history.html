@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %} 
+<div class="page-container--flex-column">
+
+    {% if not urls %}
+        <div class="dashboard-info">
+            <h3>
+                No short url has been created yet.
+                <a href="{{url_for('home')}}">Create One</a>
+            </h3>
+        </div>
+    {%else%}
+        {% for url in urls%}
+            <div class="container history">
+                <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="post-preview">
+                        <a class="post-title" href="/dashboard/{{url.id}}">
+                            <div>
+                                <h2>
+                                    {{url.title}} 
+                                </h2>
+                                <span>{{url.long_url}}</span>
+                            </div>
+                        
+                        </a>
+                        <p class="post-meta">
+                            <span class="orb-icon">
+                                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" role="graphics-document" height="15" width="15" xmlns="http://www.w3.org/2000/svg">
+                                    <title>Created Info</title>
+                                    <path fill="none" d="M0 0h24v24H0z"></path>
+                                    <path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"></path>
+                                </svg>
+                            </span>
+                            
+                            <span class="author-name">{{url.created_at.strftime('%B %d, %Y')}} by {{current_user.username}}</span>
+                        </p>
+                    </div>
+                    <hr>
+                </div>
+                </div>
+            </div>
+        {%endfor%}
+    {%endif%}
+</div>
+
+
+{%endblock content %}
+
+
+

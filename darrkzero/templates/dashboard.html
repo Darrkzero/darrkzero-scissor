@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="dashboard" >
+    {% if current_user.is_authenticated %}
+        {% if url %}
+      
+        <div class="card" style="padding-left: 60px;">
+                        <h3 class="dashboard-title">{{url.title|capitalize}}</h3>
+                        <img class="qr-code" src="{{url_for('static', filename='temp_qrcode.png')}}" alt="QR Code">
+                        <div class="card-body" style="padding-top: 0; padding-left: 30px;">
+                            <div>
+                                <h5 class="">Link Clicks: {{url.clicks}} </h5>
+                                <h3 class="dashboard-sub-title">Link:</h3>
+                                {{ url.long_url }}
+                            </div>
+                            <div>
+                                <h3 class="dashboard-sub-title">Shortened Link:</h3> 
+                                <a href="{{ url_for('redirect_url', url_code=url.url_code) }}" style="color: aliceblue; text-decoration: underline;" target="_blank">
+                                <input type="text" value="{{host}}{{url.url_code}}" id="myInput" style="background: none; border: none; cursor: pointer; color: blue; text-decoration: underline; padding: 0;" disabled>
+                                </a>
+                            </div>
+                                <h5><br><span class="orb-icon">
+                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" role="graphics-document" height="15" width="15" xmlns="http://www.w3.org/2000/svg">
+                                        <title>Created Info</title>
+                                        <path fill="none" d="M0 0h24v24H0z"></path>
+                                        <path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"></path>
+                                    </svg>
+                                    </span> {{ url.created_at.strftime('%B %d, %Y') }}
+                                </h5>
+
+
+                            
+                            {%if not url.custom_url%}
+                            <div class="delete">
+                                <a class=" btn btn-danger btn-sm " href="/delete/{{url.id}}" role="button" >Delete</a>
+                            </div>
+                            {%else%}
+                            <div class="delete">
+                                <a class=" btn btn-primary btn-sm" href="/edit/{{url.id}}" role="button" >Edit</a>
+                                <a class=" btn btn-danger btn-sm " href="/delete/{{url.id}}" role="button" >Delete</a>
+                            </div>
+                            {%endif%}
+                            
+                        </div>
+        </div>
+               
+            
+        
+        <!-- {%else%} -->
+            
+        {% endif %}
+    {% else %}
+    <h1>Please login to see your urls</h1>
+    {% endif %}
+
+</section>
+    
+{%endblock content %}

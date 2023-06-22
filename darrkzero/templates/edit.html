@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %} 
+    <form method="post" class="edit-list">
+        
+        <h2 class="signin">Edit URL</h2>
+        <label for="long_url">Url:</label>
+        <input type="text" name="long_url" value="{{url.long_url}}" disabled>
+        
+        <label for="custom_url">Custom url:</label>
+        <!-- <ion-icon name="create-outline"></ion-icon> -->
+        <input type="text" name="custom_url" value="" required>
+
+        <br>
+        <button type="submit" class="btn btn-primary">Submit changes</button>
+    </form>
+
+{% endblock content %}
