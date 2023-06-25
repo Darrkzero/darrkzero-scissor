@@ -3,8 +3,9 @@
 <section class="dashboard" >
     {% if current_user.is_authenticated %}
         {% if url %}
+        <h1 style="text-align: center; padding: 20px;">Dashboard</h1>
       
-        <div class="card" style="padding-left: 60px;">
+        <div class="card dashboard-card">
                         <h3 class="dashboard-title">{{url.title|capitalize}}</h3>
                         <img class="qr-code" src="{{url_for('static', filename='temp_qrcode.png')}}" alt="QR Code">
                         <div class="card-body" style="padding-top: 0; padding-left: 30px;">

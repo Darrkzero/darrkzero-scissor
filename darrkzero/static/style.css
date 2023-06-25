@@ -211,6 +211,16 @@ article{
     border-radius: 0;
     margin: 0;
   }
-  
+  .home-list {
+    width: 100%;
+}
+.intro-logo-img{
+    width: 20%;
+}
 }
 
+@media (max-width:991px){
+    .home{
+        padding-bottom: 0;
+    }
+}
