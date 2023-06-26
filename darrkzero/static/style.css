@@ -100,7 +100,6 @@ input, select{
 .img-home{
     padding: 50px;
     width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,6 +119,9 @@ input, select{
     padding: 50px;
     margin-top: 100px 0;
     box-sizing: border-box
+}
+.image{
+    padding-top: 50px;
 }
 
 /* dashboard  */
@@ -204,7 +206,7 @@ article{
 #footer{
     text-align: center;
 }
-@media (max-width:800px){
+@media (max-width:991px){
   .contact-list, .register-list, .login-list{
     width: 100%;
     border: none;
@@ -217,10 +219,20 @@ article{
 .intro-logo-img{
     width: 20%;
 }
+.brand-logo{
+    width: 30px;
+    height: 30px;
+}
+.image{
+    padding-top: 10px;
+}
+.img-home{
+    padding: 0 40px 0 40px;
+}
 }
 
 @media (max-width:991px){
     .home{
-        padding-bottom: 0;
+        padding: 0;
     }
 }
