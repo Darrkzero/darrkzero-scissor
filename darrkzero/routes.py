@@ -1,6 +1,5 @@
 from flask import render_template, send_file, url_for, flash, redirect, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
-# from flask_share import Share
 from werkzeug.security import generate_password_hash, check_password_hash
 from random import randint
 import qrcode
@@ -9,11 +8,21 @@ import shortuuid
 import string
 import random
 from urllib.parse import urlparse
-
+import re
 
 from .models import Url, User
 from . import app, db, mail, cache
 
+
+def is_valid_url(url):
+    regex = re.compile(
+        r'^(?:http|ftp)s?://'  # scheme
+        r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
+        r'localhost|'  # localhost...
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # ...or IP
+        r'(?::\d+)?'  # optional port
+        r'(?:/?|[/?]\S+)$', re.IGNORECASE)
+    return bool(regex.match(url))
 
 def shorten_url(long_url):
     # Generate a random short URL key
@@ -104,24 +113,28 @@ def home():
         long_url = request.form['long_url']
         title = request.form['title']
         custom_url = request.form['custom_url'] or None
-        if custom_url:
-            existing_url = Url.query.filter_by(short_url=custom_url).first()
-            if existing_url:
-                flash ('That custom URL already exists. Please try another one!')
-                return redirect(url_for('home'))
-            o = urlparse(request.base_url)
-            short_url = f"{o.hostname}/{custom_url}"
-            url_code = custom_url
-            custom_url=custom_url
-        elif long_url[:4] != 'http':
-            long_url = 'http://' + long_url
+        if is_valid_url(long_url):
+            if custom_url:
+                existing_url = Url.query.filter_by(short_url=custom_url).first()
+                if existing_url:
+                    flash ('That custom URL already exists. Please try another one!')
+                    return redirect(url_for('home'))
+                o = urlparse(request.base_url)
+                short_url = f"{o.netloc}/{custom_url}"
+                url_code = custom_url
+                custom_url=custom_url
+            elif long_url[:4] != 'http':
+                long_url = 'http://' + long_url
+            else:
+                o = urlparse(request.base_url)
+                url_code = shortuuid.uuid()[:6]
+                short_url = f"{o.hostname}/{url_code}"
+            url = Url(long_url=long_url, short_url=short_url, custom_url=custom_url, url_code = url_code, title=title, user_id=current_user.id)
+            url.save()
+            return redirect(url_for('dashboard', url_id =url.id))
         else:
-            o = urlparse(request.base_url)
-            url_code = shortuuid.uuid()[:6]
-            short_url = f"{o.hostname}/{url_code}"
-        url = Url(long_url=long_url, short_url=short_url, custom_url=custom_url, url_code = url_code, title=title, user_id=current_user.id)
-        url.save()
-        return redirect(url_for('dashboard', url_id =url.id))
+            flash ('Invalid url')
+            return redirect(url_for('home'))
 
     urls = Url.query.order_by(Url.created_at.desc()).limit(10).all()
     return render_template('index.html', urls=urls)
