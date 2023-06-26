@@ -24,7 +24,7 @@ pip install -r requirements.txt
 ```
 
 ```console
-python runserver.py
+flask run
 ```
 
 ## Built with:
