@@ -17,6 +17,8 @@ Python version: Python 3.10.10
 1. A user can shorten long URLs to make them more compact and easier to share. Additionally, the user have the option to customize the shortened URLs with their own desired keywords.
 2. QR code generation for the shortened URLs, it allows the user to quickly share them in printed or digital media. Simply scan the QR code with a compatible device to access the corresponding URL
 3. The website tracks the number of clicks each shortened URL receives. This helps the user monitor the popularity and effectiveness of their shared links.
+
+
 ```console
 python -m venv venv
 source venv/bin/activate
