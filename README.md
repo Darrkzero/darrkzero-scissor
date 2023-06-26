@@ -1,5 +1,5 @@
 # darrkzero-scissor Application
-darrkzero-scissor project aims to develop a user-friendly and efficient URL shortening service. This application makes URL management a breeze! With various powerful tools and features, you can easily shorten URLs, customize them to your liking, generate QR codes, and track the number of clicks for each URL.
+darrkzero-scissor project aims to develop a user-friendly and efficient URL shortening service. This application makes URL management a breeze! With various powerful tools and features, you can easily shorten URLs, customize them to your liking, generate QR codes, and track the number of clicks for each URL. It is built with Flask  and can be accessed through https://darrkzero.pythonanywhere.com/, a PythonAnywhere-powered web app
 
 <h1>Prerequisites</h1>
 Python version: Python 3.10.10
