@@ -49,9 +49,9 @@ flask run
 
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 
-![Jinja](https://img.shields.io/badge/jinja-%2307405e.svg?style=for-the-badge&logo=jinja&logoColor=black&background-color=white&color=black)
+![Jinja](https://img.shields.io/badge/jinja-%2307405e.svg?style=for-the-badge&logo=jinja&logoColor=white&background-color=white&color=black)
 
-![HTML5](https://img.shields.io/badge/html5-%2307405e.svg?style=for-the-badge&logo=html5&logoColor=white&background-color=red)
+![HTML5](https://img.shields.io/badge/html5-%2307405e.svg?style=for-the-badge&logo=html5&logoColor=white&color=red)
 
 ![CSS3](https://img.shields.io/badge/css3-3670A0?style=for-the-badge&logo=css3&logoColor=ffdd54)
 
